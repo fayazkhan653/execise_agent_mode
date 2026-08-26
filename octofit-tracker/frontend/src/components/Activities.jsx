@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react';
 import { fetchItems } from '../api';
 
+const activitiesEndpoint = import.meta.env.VITE_CODESPACE_NAME
+  ? `https://${import.meta.env.VITE_CODESPACE_NAME}-8000.app.github.dev/api/activities/`
+  : null;
+
 function Activities() {
   const [state, setState] = useState({ items: [], loading: true, configured: true, error: '' });
 
   useEffect(() => {
-    fetchItems('/api/activities/').then((result) => setState({ ...result, loading: false, error: '' }))
+    fetchItems(activitiesEndpoint).then((result) => setState({ ...result, loading: false, error: '' }))
       .catch((error) => setState({ items: [], loading: false, configured: true, error: error.message }));
   }, []);
 

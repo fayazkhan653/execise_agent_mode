@@ -5,6 +5,7 @@ export const apiBaseUrl = codeSpaceName
   : null;
 
 export function getApiUrl(resource) {
+  if (resource?.startsWith('https://')) return resource;
   if (!apiBaseUrl) return null;
   return resource.startsWith('/api/')
     ? `https://${codeSpaceName}-8000.app.github.dev${resource}`
