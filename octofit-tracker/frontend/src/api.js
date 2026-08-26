@@ -5,7 +5,10 @@ export const apiBaseUrl = codeSpaceName
   : null;
 
 export function getApiUrl(resource) {
-  return apiBaseUrl ? `${apiBaseUrl}/${resource}/` : null;
+  if (!apiBaseUrl) return null;
+  return resource.startsWith('/api/')
+    ? `https://${codeSpaceName}-8000.app.github.dev${resource}`
+    : `${apiBaseUrl}/${resource}/`;
 }
 
 export function getItems(payload) {

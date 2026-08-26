@@ -5,7 +5,7 @@ function Activities() {
   const [state, setState] = useState({ items: [], loading: true, configured: true, error: '' });
 
   useEffect(() => {
-    fetchItems('activities').then((result) => setState({ ...result, loading: false, error: '' }))
+    fetchItems('/api/activities/').then((result) => setState({ ...result, loading: false, error: '' }))
       .catch((error) => setState({ items: [], loading: false, configured: true, error: error.message }));
   }, []);
 
